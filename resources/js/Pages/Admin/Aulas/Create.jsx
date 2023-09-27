@@ -2,13 +2,7 @@ import Layout from "@/Layouts/Admin/Layout";
 import {TextField} from "@mui/material";
 import {useForm} from "@inertiajs/react";
 
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-
-export default function ({turma}) {
+export default function ({dados, turma}) {
     const {setData, post} = useForm({
         turma_id: turma.id
     });

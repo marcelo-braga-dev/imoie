@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Alunos;
 
 use App\Http\Controllers\Controller;
+use App\Models\Inscricoes;
 use App\Models\Turmas;
 use App\Models\User;
 use App\src\Usuarios\CadastrarUsuarios;
@@ -19,16 +20,19 @@ class AlunosController extends Controller
         return Inertia::render('Admin/Alunos/Index', compact('alunos'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
+        $dados = $request->incricao ? (new Inscricoes())->find($request->incricao) : [];
         $turmas = (new Turmas())->get();
 
-        return Inertia::render('Admin/Alunos/Create', compact('turmas'));
+        return Inertia::render('Admin/Alunos/Create',
+            compact('dados', 'turmas'));
     }
 
     public function store(Request $request)
     {
         (new CadastrarUsuarios())->cadastrar($request, (new AlunosUsuario()));
+        $request->incricao ? (new Inscricoes())->setMatriculado($request->incricao) : null;
 
         return redirect()->route('admin.alunos.index');
     }

@@ -6,3 +6,4 @@ require __DIR__ . '/aulas.php';
 require __DIR__ . '/alunos.php';
 require __DIR__ . '/mensalidades.php';
 require __DIR__ . '/perfil.php';
+require __DIR__ . '/inscricoes.php';

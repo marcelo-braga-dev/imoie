@@ -5,6 +5,7 @@ import EventAvailableOutlinedIcon from '@mui/icons-material/EventAvailableOutlin
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
 import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
+import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 
 export default function Sidebar({menuSidebar, submenuSidebar}) {
     const logo = "/storage/crm/imagens/logo.png";
@@ -21,6 +22,12 @@ export default function Sidebar({menuSidebar, submenuSidebar}) {
             'icone': <GroupOutlinedIcon style={{color: 'white'}} color=""/>,
             'url': route('admin.alunos.index'),
             'tagMenu': 'alunos',
+            'submenu': []
+        }, {
+            'menu': 'Inscrições',
+            'icone': <PersonAddAltIcon style={{color: 'white'}} color=""/>,
+            'url': route('admin.inscricoes.index'),
+            'tagMenu': 'inscricoes',
             'submenu': []
         }, {
             'menu': 'Mensalidades',

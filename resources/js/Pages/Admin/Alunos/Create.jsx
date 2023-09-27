@@ -8,8 +8,13 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function ({turmas}) {
-    const {setData, post} = useForm();
+export default function ({dados, turmas}) {
+    const {data, setData, post} = useForm({
+        nome: dados.nome,
+        email: dados.email,
+        turma: dados.turma_id,
+        incricao: dados.id
+    });
 
     function submit(e) {
         e.preventDefault()
@@ -22,13 +27,13 @@ export default function ({turmas}) {
             <form onSubmit={submit}>
                 <div className="row">
                     <div className="col-12 mb-3">
-                        <TextField label="Nome da Turma" fullWidth required
+                        <TextField label="Nome" fullWidth required defaultValue={data.nome}
                                    onChange={e => setData('nome', e.target.value)}/>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-6 mb-3">
-                        <TextField label="Email" type="email" fullWidth required
+                        <TextField label="Email" type="email" fullWidth required defaultValue={data.email}
                                    onChange={e => setData('email', e.target.value)}/>
                     </div>
                     <div className="col-6 mb-3">
@@ -43,7 +48,7 @@ export default function ({turmas}) {
                             <Select
                                 labelId="demo-simple-select-label" required
                                 id="demo-simple-select"
-                                defaultValue=""
+                                defaultValue={data.turma}
                                 label="Instrutor (a)"
                                 onChange={e => setData('turma', e.target.value)}
                             >
