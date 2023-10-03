@@ -19,6 +19,7 @@ class Turmas extends Model
     {
         $dados = $this->newQuery()
             ->find($id);
+        if (!$dados) return [];
 
         $nomes = (new User())->getNomes();
 
