@@ -14,6 +14,8 @@ class Mensalidades extends Model
         'turma',
         'valor',
         'status',
+        'parcela',
+        'total_parcelas',
         'link_pagamento',
         'token',
         'data_vencimento',
@@ -35,6 +37,8 @@ class Mensalidades extends Model
             'id' => $dados->id,
             'turma' => $dados->turma,
             'valor' => convert_float_money($dados->valor),
+            'parcela' => $dados->parcela,
+            'total_parcelas' => $dados->total_parcelas,
             'status' => $dados->status,
             'link_pagamento' => $dados->link_pagamento,
             'data_vencimento' => date('d/m/Y', strtotime($dados->data_vencimento)),
@@ -48,6 +52,8 @@ class Mensalidades extends Model
                 'users_id' => $aluno,
                 'turma' => $turma,
                 'valor' => convert_money_float($dados['valor']),
+                'parcela' => $dados['parcela'],
+                'total_parcelas' => $dados['totalParcelas'],
                 'status' => 'aberto',
                 'link_pagamento' => $dados['link'],
                 'token' => uniqid(),
@@ -70,6 +76,8 @@ class Mensalidades extends Model
                     'turma' => $turmas[$item->turma] ?? '',
                     'valor' => convert_float_money($item->valor),
                     'valor_float' => $item->valor,
+                    'parcela' => $item->parcela,
+                    'total_parcelas' => $item->total_parcelas,
                     'status' => $item->status,
                     'link_pagamento' => $item->link_pagamento,
                     'token' => $item->token,
@@ -84,7 +92,7 @@ class Mensalidades extends Model
         $nomes = (new User())->getNomes();
 
         return $this->newQuery()
-            ->orderByDesc('data_vencimento')
+            ->orderBy('data_vencimento')
             ->get()
             ->transform(function ($item) use ($turmas, $nomes) {
                 return [
@@ -93,6 +101,8 @@ class Mensalidades extends Model
                     'aluno_id' => $item->users_id,
                     'turma' => $turmas[$item->turma] ?? '',
                     'valor' => convert_float_money($item->valor),
+                    'parcela' => $item->parcela,
+                    'total_parcelas' => $item->total_parcelas,
                     'valor_float' => $item->valor,
                     'status' => $item->status,
                     'link_pagamento' => $item->link_pagamento,
@@ -116,6 +126,8 @@ class Mensalidades extends Model
             'aluno_id' => $item->users_id,
             'turma' => $turmas[$item->turma] ?? '',
             'valor' => convert_float_money($item->valor),
+            'parcela' => $item->parcela,
+            'total_parcelas' => $item->total_parcelas,
             'valor_float' => $item->valor,
             'status' => $item->status,
             'link_pagamento' => $item->link_pagamento,

@@ -78,7 +78,7 @@ class TurmasController extends Controller
             compact('turma', 'alunos'));
     }
 
-    public function updateAluno($id, Request $request)
+    public function storeAluno($id, Request $request)
     {
         (new User)->atualizarTurma($request->aluno, $request->turma);
 

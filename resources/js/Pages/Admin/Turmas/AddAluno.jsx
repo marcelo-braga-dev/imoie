@@ -6,7 +6,6 @@ import MenuItem from "@mui/material/MenuItem";
 import {router, useForm} from "@inertiajs/react";
 import {InputAdornment, TextField} from "@mui/material";
 import React, {useState} from "react";
-import TextFieldMoney from "@/Components/Inputs/TextFieldMoney";
 
 export default function ({alunos, turma}) {
 
@@ -64,6 +63,7 @@ export default function ({alunos, turma}) {
                                 ...data?.parcelas?.['i' + i],
                                 parcela: i,
                                 valor: maskMoney(e.target.value),
+                                totalParcelas: qtdParcelas
                             },
                         })}/>
                 </div>

@@ -13,9 +13,21 @@ class PerfilController extends Controller
     public function index()
     {
         $dados = (new User())->dadosUsuario(id_usuario_atual());
-//        $turma = (new Turmas())->find(turma_aluno());
 
         return Inertia::render('Admin/Perfil/Index',
             compact('dados'));
+    }
+
+    public function update($id, Request $request)
+    {
+        if ($request->senha !== $request->senha_confirmar) {
+            modalErro('Senhas não coincidem.');
+            return redirect()->back();
+        }
+
+        (new User())->atualizarSenha($id, $request->senha);
+
+        modalSucesso('Senha atualizada com sucesso!');
+        return redirect()->back();
     }
 }

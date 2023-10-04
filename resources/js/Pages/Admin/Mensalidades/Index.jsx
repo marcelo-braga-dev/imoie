@@ -8,8 +8,6 @@ export default function ({mensalidades}) {
                 <div className="col">
                     <h6>Mensalidades</h6>
                 </div>
-                <div className="col">
-                </div>
             </div>
             <div className="row">
                 <div className="col">
@@ -19,6 +17,7 @@ export default function ({mensalidades}) {
                             <tr>
                                 <th className="text-center col-1">ID</th>
                                 <th>Nome</th>
+                                <th className="text-center">Parcela</th>
                                 <th className="text-center">Data Vencimento</th>
                                 <th>Turma</th>
                                 <th className="text-center">Status</th>
@@ -31,6 +30,7 @@ export default function ({mensalidades}) {
                                     <tr key={index}>
                                         <td className="text-center">#{item.id}</td>
                                         <td>{item.aluno_nome}</td>
+                                        <td className="text-center">{item.parcela}/{item.total_parcelas}</td>
                                         <td className="text-center">{item.data_vencimento}</td>
                                         <td>{item.turma}</td>
                                         <td className="text-center">{item.status}</td>

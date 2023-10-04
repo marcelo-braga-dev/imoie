@@ -34,7 +34,7 @@ export default function ({prof}) {
                                         <td>{item.turma}</td>
                                         <td className="col-1">
                                             <a className="btn btn-primary"
-                                               href={route('admin.alunos.show', item.id)}>Ver</a>
+                                               href={route('admin.professores.show', item.id)}>Ver</a>
                                         </td>
                                     </tr>
                                 )

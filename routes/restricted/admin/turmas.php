@@ -13,6 +13,6 @@ Route::middleware('auth')
             ->name('turmas.aulas');
         Route::get('turma/add-aluno/{id}', [TurmasController::class, 'addAluno'])
             ->name('turmas.add-aluno');
-        Route::put('turma/add-aluno/{id}', [TurmasController::class, 'updateAluno'])
+        Route::put('turma/add-aluno/{id}', [TurmasController::class, 'storeAluno'])
             ->name('turmas.add-aluno');
     });

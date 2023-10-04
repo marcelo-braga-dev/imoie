@@ -8,32 +8,29 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function ({dados, turmas}) {
+export default function ({turmas}) {
     const {data, setData, post} = useForm({
-        nome: dados.nome,
-        email: dados.email,
-        turma: dados.turma_id,
-        incricao: dados.id
+
     });
 
     function submit(e) {
         e.preventDefault()
-        post(route('admin.alunos.store'))
+        post(route('admin.professores.store'))
     }
 
     return (
-        <Layout container titlePage="Cadastrar Alunos" menu="alunos"
-                voltar={route('admin.alunos.index')}>
+        <Layout container titlePage="Cadastrar Professores(as)" menu="professores"
+                voltar={route('admin.professores.index')}>
             <form onSubmit={submit}>
                 <div className="row">
                     <div className="col-12 mb-3">
-                        <TextField label="Nome" fullWidth required defaultValue={data.nome}
+                        <TextField label="Nome" fullWidth required
                                    onChange={e => setData('nome', e.target.value)}/>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-6 mb-3">
-                        <TextField label="Email" type="email" fullWidth required defaultValue={data.email}
+                        <TextField label="Email" type="email" fullWidth required
                                    onChange={e => setData('email', e.target.value)}/>
                     </div>
                     <div className="col-6 mb-3">
@@ -48,7 +45,6 @@ export default function ({dados, turmas}) {
                             <Select
                                 labelId="demo-simple-select-label" required
                                 id="demo-simple-select"
-                                defaultValue={data.turma}
                                 label="Instrutor (a)"
                                 onChange={e => setData('turma', e.target.value)}
                             >

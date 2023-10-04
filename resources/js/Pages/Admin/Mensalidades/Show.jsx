@@ -16,8 +16,9 @@ export default function ({dados}) {
                 <div className="col">
                     <span className="d-block"><b>Nome:</b> {dados.aluno_nome}</span>
                     <span className="d-block"><b>Data Vencimento:</b> {dados.data_vencimento}</span>
-                    <span className="d-block"><b>Status:</b> {dados.status}</span>
                     <span className="d-block"><b>Valor:</b> R$ {dados.valor}</span>
+                    <span className="d-block"><b>Parcela:</b> {dados.parcela}/{dados.total_parcelas}</span>
+                    <span className="d-block"><b>Status:</b> {dados.status}</span>
                     <span className="d-block"><b>Turma:</b> {dados.turma}</span>
                     <span className="d-block"><b>Link Pagamento:</b> {dados.link_pagamento}</span>
                     <span className="d-block"><b>ID:</b> #{dados.id}</span>

@@ -17,15 +17,15 @@ export default function ({aluno, turmas}) {
 
     function submit(e) {
         e.preventDefault()
-        router.post(route('admin.alunos.update', aluno.id), {
+        router.post(route('admin.professores.update', aluno.id), {
             '_method': 'put',
             ...data
         })
     }
 
     return (
-        <Layout container titlePage="Atualizar Dados" menu="alunos"
-                voltar={route('admin.alunos.index')}>
+        <Layout container titlePage="Atualizar Dados" menu="professores"
+                voltar={route('admin.professores.index')}>
             <form onSubmit={submit}>
                 <div className="row">
                     <div className="col-12 mb-3">

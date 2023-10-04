@@ -6,12 +6,12 @@ export default function ({dados}) {
 
     function submit(e) {
         e.preventDefault()
-        post(route('admin.alunos.store'))
+        post(route('admin.professores.store'))
     }
 
     return (
-        <Layout container titlePage="Informações" menu="alunos"
-                voltar={route('admin.alunos.index')}>
+        <Layout container titlePage="Informações" menu="professores"
+                voltar={route('admin.professores.index')}>
             <div className="row">
                 <div className="col">
                     <span className="d-block"><b>Nome:</b> {dados.nome}</span>
@@ -21,7 +21,7 @@ export default function ({dados}) {
                 </div>
                 <div className="col-auto">
                     <a className="btn btn-primary"
-                       href={route('admin.alunos.edit', dados.id)}>Editar</a>
+                       href={route('admin.professores.edit', dados.id)}>Editar</a>
                 </div>
             </div>
         </Layout>

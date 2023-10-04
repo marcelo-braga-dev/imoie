@@ -19,4 +19,17 @@ class PerfilController extends Controller
         return Inertia::render('Alunos/Perfil/Index',
             compact('dados', 'turma'));
     }
+
+    public function update($id, Request $request)
+    {
+        if ($request->senha !== $request->senha_confirmar) {
+            modalErro('Senhas não coincidem.');
+            return redirect()->back();
+        }
+
+        (new User())->atualizarSenha($id, $request->senha);
+
+        modalSucesso('Senha atualizada com sucesso!');
+        return redirect()->back();
+    }
 }

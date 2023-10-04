@@ -92,8 +92,9 @@ class User extends Authenticatable
                 'name' => $dados->nome,
                 'email' => $dados->email,
                 'turma' => $dados->turma,
-//                'status' => (new AtivoStatusUsuario())->getStatus(),
             ]);
+
+        if ($dados->senha) $this->atualizarSenha($id, $dados->senha);
     }
 
     public function get()
@@ -106,6 +107,7 @@ class User extends Authenticatable
         $dados = $this->newQuery()
             ->find($id);
         return [
+            'id' => $dados->id,
             'nome' => $dados->name,
             'email' => $dados->email,
         ];

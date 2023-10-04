@@ -17,10 +17,12 @@ return new class extends Migration {
             $table->integer('users_id');
             $table->integer('turma');
             $table->float('valor');
+            $table->integer('parcela');
+            $table->integer('total_parcelas');
             $table->string('status');
             $table->string('link_pagamento')->nullable();
             $table->string('token')->nullable();
-            $table->timestamp('data_vencimento');
+            $table->date('data_vencimento');
             $table->timestamps();
         });
     }

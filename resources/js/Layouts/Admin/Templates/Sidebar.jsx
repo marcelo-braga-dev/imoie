@@ -1,6 +1,5 @@
 import * as React from "react";
-import RuleOutlinedIcon from '@mui/icons-material/RuleOutlined';
-import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
+
 import EventAvailableOutlinedIcon from '@mui/icons-material/EventAvailableOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
@@ -24,8 +23,8 @@ export default function Sidebar({menuSidebar, submenuSidebar}) {
             'tagMenu': 'alunos',
             'submenu': []
         }, {
-            'menu': 'Professores',
-            'icone': <PersonAddAltIcon style={{color: 'white'}} color=""/>,
+            'menu': 'Professores(as)',
+            'icone': <GroupOutlinedIcon style={{color: 'white'}} color=""/>,
             'url': route('admin.professores.index'),
             'tagMenu': 'professores',
             'submenu': []
