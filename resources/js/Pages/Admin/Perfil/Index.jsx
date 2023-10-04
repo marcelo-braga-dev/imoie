@@ -2,7 +2,7 @@ import Layout from "@/Layouts/Admin/Layout";
 
 export default function ({dados}) {
     return (
-        <Layout container titlePage="Mensalidades" menu="perfil">
+        <Layout container titlePage="Perfil" menu="perfil">
             <h6>Seus dados</h6>
             <div className="row">
                 <div className="col">

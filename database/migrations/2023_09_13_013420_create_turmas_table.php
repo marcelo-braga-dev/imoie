@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -17,7 +16,14 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->integer('professor')->nullable();
+            $table->boolean('status')->default(true);
             $table->string('data');
+            $table->integer('max_alunos')->nullable();
+            $table->float('valor');
+            $table->integer('qtd_parcelas');
+            $table->float('desconto_vista');
+            $table->date('inicio');
+            $table->date('fim');
             $table->timestamps();
         });
     }

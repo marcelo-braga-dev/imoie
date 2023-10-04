@@ -23,6 +23,8 @@ return new class extends Migration {
             $table->string('email');
             $table->integer('turma');
             $table->string('forma_pagamento');
+            $table->integer('qtd_parcelas');
+            $table->boolean('novo')->default(true);
             $table->boolean('matriculado')->default(false);
             $table->timestamps();
         });

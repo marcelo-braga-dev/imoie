@@ -135,15 +135,17 @@ class User extends Authenticatable
 
     public function getProfessores()
     {
-        $nomes = $this->getNomes();
+        $turmas = (new Turmas())->getNomes();
 
         return $this->newQuery()
             ->where('funcao', (new ProfUsuario())->getFuncao())
             ->get()
-            ->transform(function ($item) use ($nomes) {
+            ->transform(function ($item) use ($turmas) {
                 return [
                     'id' => $item->id,
-                    'nome' => $nomes[$item->id]['nome'] ?? '',
+                    'nome' => $item->name,
+                    'turma_id' => $item->turma,
+                    'turma' => $turmas[$item->turma] ?? 'Não inserida',
                 ];
             });
     }

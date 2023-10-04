@@ -12,7 +12,7 @@ class InscricoesController extends Controller
 {
     public function index()
     {
-        $turmas = (new Turmas())->get();
+        $turmas = (new Inscricoes())->getPorTurmas();
 
         return Inertia::render('Admin/Inscricoes/Index',
             compact('turmas'));

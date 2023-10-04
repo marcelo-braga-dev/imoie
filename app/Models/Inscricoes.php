@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Inscricoes extends Model
 {
@@ -19,7 +20,9 @@ class Inscricoes extends Model
         'email',
         'turma',
         'forma_pagamento',
-        'matriculado'
+        'qtd_parcelas',
+        'matriculado',
+        'novo'
     ];
 
     public function create($dados)
@@ -35,6 +38,7 @@ class Inscricoes extends Model
                 'email' => $dados->email,
                 'turma' => $dados->turma,
                 'forma_pagamento' => $dados->forma_pagamento,
+                'qtd_parcelas' => $dados->qtd_parcelas,
             ]);
     }
 
@@ -57,6 +61,7 @@ class Inscricoes extends Model
                     'email' => $dados->email,
                     'turma' => $turmas[$dados->turma] ?? '',
                     'forma_pagamento' => $dados->forma_pagamento,
+                    'qtd_parcelas' => $dados->qtd_parcelas,
                     'matriculado' => $dados->matriculado ? 'Sim' : 'Não',
                     'data' => date('d/m/y H:i', strtotime($dados->created_at))
                 ];
@@ -82,6 +87,7 @@ class Inscricoes extends Model
             'turma_id' => $dados->turma,
             'turma' => $turmas[$dados->turma] ?? '',
             'forma_pagamento' => $dados->forma_pagamento,
+            'qtd_parcelas' => $dados->qtd_parcelas,
             'matriculado' => $dados->matriculado ? 'Sim' : 'Não',
             'data' => date('d/m/y H:i', strtotime($dados->created_at))
         ];
@@ -115,8 +121,29 @@ class Inscricoes extends Model
                     'email' => $dados->email,
                     'turma' => $turmas[$dados->turma] ?? '',
                     'forma_pagamento' => $dados->forma_pagamento,
+                    'qtd_parcelas' => $dados->qtd_parcelas,
                     'matriculado' => $dados->matriculado ? 'Sim' : 'Não',
                     'data' => date('d/m/y H:i', strtotime($dados->created_at))
+                ];
+            });
+    }
+
+    public function getPorTurmas()
+    {
+        $turmas = (new Turmas())->getNomes();
+
+        return $this->newQuery()
+            ->select(
+                DB::raw('COUNT(turma) as qtd, turma as id, COUNT(novo) as novo')
+            )
+            ->groupBy(DB::raw('turma'))
+            ->get()
+            ->transform(function ($item) use ($turmas) {
+                return [
+                    'id' => $item->id,
+                    'nome' => $turmas[$item->id] ?? '',
+                    'total' => $item->qtd,
+                    'novos' => $item->novo
                 ];
             });
     }

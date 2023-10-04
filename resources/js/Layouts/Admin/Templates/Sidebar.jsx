@@ -18,10 +18,16 @@ export default function Sidebar({menuSidebar, submenuSidebar}) {
             'url': route('admin.turmas.index'),
             'submenu': []
         }, {
-            'menu': 'Alunos',
+            'menu': 'Estudantes',
             'icone': <GroupOutlinedIcon style={{color: 'white'}} color=""/>,
             'url': route('admin.alunos.index'),
             'tagMenu': 'alunos',
+            'submenu': []
+        }, {
+            'menu': 'Professores',
+            'icone': <PersonAddAltIcon style={{color: 'white'}} color=""/>,
+            'url': route('admin.professores.index'),
+            'tagMenu': 'professores',
             'submenu': []
         }, {
             'menu': 'Inscrições',

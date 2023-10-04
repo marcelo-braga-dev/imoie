@@ -19,14 +19,14 @@ export default function ({turmas}) {
                                 className="list-group-item d-flex justify-content-around align-items-center">
                                 <div className="ms-2 me-auto">
                                     <span className="fw-bold me-3">Turma: {item.nome}</span>
-                                    <span className="d-block">Instrutor(a): {item.professor}</span>
+                                    <small className="d-block">Professor(a): {item.professor}</small>
                                     <small className="d-bl ock">Horário: {item.data}</small>
                                 </div>
                                 <div>
                                     <a href={route('admin.turmas.aulas', {id: item.id})}
                                        className="btn btn-success btn-sm mx-2 px-3">Aulas</a>
                                     <a href={route('admin.turmas.show', item.id)}
-                                       className="btn btn-primary btn-sm mx-2 px-3">Integrantes</a>
+                                       className="btn btn-primary btn-sm mx-2 px-3">Estudantes</a>
                                     <a href={route('admin.turmas.edit', item.id)}
                                        className="btn btn-warning btn-sm mx-2 px-3">Editar</a>
                                 </div>

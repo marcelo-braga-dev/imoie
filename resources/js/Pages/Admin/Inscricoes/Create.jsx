@@ -1,18 +1,41 @@
-import Layout from "@/Layouts/Admin/Layout";
-import {FormControlLabel, FormLabel, Radio, RadioGroup, TextField} from "@mui/material";
+import {FormControlLabel, Radio, RadioGroup, TextField} from "@mui/material";
 import {useForm} from "@inertiajs/react";
 
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import convertFloatToMoney from "@/utils/convertFloatToMoney";
+import {data} from "autoprefixer";
+import {useState} from "react";
 
 export default function ({turmas}) {
-    const {setData, post} = useForm();
+    const {data, setData, post} = useForm();
+    const [qtdParcelas, setQtdParcelas] = useState()
+    const [valorTotal, setValorTotal] = useState()
 
     function submit(e) {
         e.preventDefault()
         post(route('incricoes.cadastro.inscricao'))
+    }
+
+    function selecionaTurma(turma) {
+        setData('turma', turma.id)
+        setQtdParcelas(turma.qtd_parcelas)
+        setValorTotal(turma.valor_str)
+    }
+
+    let lineParcelas = [];
+
+    function parcelas() {
+        for (let i = 1; i <= qtdParcelas; i++) {
+            lineParcelas.push(
+                <MenuItem key={i} value={i}>
+                    {i}x R$ {convertFloatToMoney(valorTotal / i)} {i === 1 ? '(à vista)' : ''}
+                </MenuItem>
+            )
+        }
+        return lineParcelas
     }
 
     return (
@@ -55,8 +78,7 @@ export default function ({turmas}) {
                                     gramática, da leitura, da escrita e da capacidade de comunicar em Inglês.
                                 </li>
                                 <li>
-                                    Curso de valor bastante acessível: mensalidades de R$150,00 (cento e cinquenta
-                                    reais).
+                                    Curso de valor bastante acessível.
                                 </li>
                             </ul>
                         </div>
@@ -64,55 +86,54 @@ export default function ({turmas}) {
                     <form className="p-4" onSubmit={submit}>
                         <h6>Inscreva-se</h6>
                         <div className="row">
-                            <div className="col-12 mb-3">
+                            <div className="col-12 mb-4">
                                 <TextField label="Nome:" fullWidth required
                                            onChange={e => setData('nome', e.target.value)}/>
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col-6 mb-3">
+                            <div className="col-6 mb-4">
                                 <TextField label="Nome Social:" fullWidth
                                            onChange={e => setData('nome_social', e.target.value)}/>
                             </div>
-                            <div className="col-6 mb-3">
+                            <div className="col-6 mb-4">
                                 <TextField label="CPF:" fullWidth required
                                            onChange={e => setData('cpf', e.target.value)}/>
                             </div>
                         </div>
                         <div className="row row-cols-3">
-                            <div className="col mb-3">
+                            <div className="col mb-4">
                                 <TextField label="Telefone:" fullWidth
                                            onChange={e => setData('telefone', e.target.value)}/>
                             </div>
-                            <div className="col mb-3">
+                            <div className="col mb-4">
                                 <TextField label="Whatsapp:" fullWidth required
                                            onChange={e => setData('whatsapp', e.target.value)}/>
                             </div>
-                            <div className="col mb-3">
+                            <div className="col mb-4">
                                 <TextField label="Contato:" fullWidth
                                            onChange={e => setData('contato', e.target.value)}/>
                             </div>
                         </div>
 
                         <div className="row row-cols-2">
-                            <div className="col mb-3">
+                            <div className="col mb-4">
                                 <TextField label="E-mail:" type="email" fullWidth required
                                            onChange={e => setData('email', e.target.value)}/>
                             </div>
                         </div>
-                        <div className="row row-cols-2 mb-3">
-                            <div className="col mb-3">
+                        <div className="row row-cols-md-3 mb-4">
+                            <div className="col mb-4">
                                 <FormControl fullWidth>
-                                    <InputLabel id="demo-simple-select-label">Turma</InputLabel>
+                                    <InputLabel id="turma">Turma</InputLabel>
                                     <Select
-                                        labelId="demo-simple-select-label" required
-                                        id="demo-simple-select"
+                                        labelId="turma" required
                                         defaultValue=""
-                                        onChange={e => setData('turma', e.target.value)}
+                                        onChange={e => selecionaTurma(e.target.value)}
                                     >
                                         {turmas.map((item, index) => {
                                             return (
-                                                <MenuItem key={index} value={item.id}>
+                                                <MenuItem key={index} value={item}>
                                                     {item.nome} ({item.data})
                                                 </MenuItem>
                                             )
@@ -120,7 +141,7 @@ export default function ({turmas}) {
                                     </Select>
                                 </FormControl>
                             </div>
-                            <div className="col mb-3">
+                            <div className="col mb-4">
                                 <FormControl fullWidth>
                                     <InputLabel id="forma_pagamento">Forma de Pagamento</InputLabel>
                                     <Select
@@ -133,8 +154,20 @@ export default function ({turmas}) {
                                     </Select>
                                 </FormControl>
                             </div>
+                            <div className="col mb-4">
+                                <FormControl fullWidth>
+                                    <InputLabel id="forma_pagamento">Parcelamento</InputLabel>
+                                    <Select
+                                        labelId="forma_pagamento" required
+                                        defaultValue=""
+                                        onChange={e => setData('qtd_parcelas', e.target.value)}
+                                    >
+                                        {parcelas()}
+                                    </Select>
+                                </FormControl>
+                            </div>
                         </div>
-                        <div className="row mb-3">
+                        <div className="row mb-4">
                             <div className="col">
                                 <FormControl>
                                     <RadioGroup name="radio-buttons-group">
